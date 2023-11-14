@@ -49,6 +49,8 @@ bool MFCustomDevice::getStringFromEEPROM(uint16_t addreeprom, char *buffer)
 
 MFCustomDevice::MFCustomDevice(uint16_t adrPin, uint16_t adrType, uint16_t adrConfig)
 {
+    if (adrPin == 0) return;
+
     /* **********************************************************************************
         Do something which is required to setup your custom device
     ********************************************************************************** */
