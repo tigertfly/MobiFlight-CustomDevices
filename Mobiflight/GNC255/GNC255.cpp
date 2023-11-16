@@ -105,6 +105,9 @@ void GNC255::set(int8_t messageID, const char *data)
     case 5: // set COM/NAV mode
         setMode(strcmp(data, "0") == 0);
         break;
+    case 6: // set COM/NAV mode
+        setContrast(atoi(data));
+        break;
     default:
         break;
     }
@@ -159,4 +162,9 @@ void GNC255::_renderLabel(const char *text, Label label, Position offset, bool u
 
     _oledDisplay->print(text);
     if (update) _oledDisplay->sendBuffer();
+}
+
+void GNC255::setContrast(uint8_t displayContrast)
+{
+    _oledDisplay->setContrast(displayContrast);
 }
