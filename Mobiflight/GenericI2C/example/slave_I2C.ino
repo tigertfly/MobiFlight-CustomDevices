@@ -6,7 +6,7 @@
 #define END_OF_I2C_MESSAGE              0x00
 #define END_OF_I2C_COMMAND              0x0D      // carriage return in ASCII
 #define END_OF_I2C_PARTIAL_MESSAGE      0x0A      // line feed in ASCII
-#define MAX_LENGTH_MESSAGE              80        // max length of a message is 80 bytes due to limitations of the CMDmessenger
+#define MAX_LENGTH_MESSAGE              96        // max length of a message is 96 bytes due to limitations of the CMDmessenger
 
 
 enum {
