@@ -31,7 +31,6 @@ void I2C_slave::init(uint8_t i2cAdr, uint32_t clock) {
     if (clock != 400000)
         clock = 100000;
     Wire.setClock(clock);
-Serial.print("Setting clock to: "); Serial.println(clock);
 }
 
 bool I2C_slave::message_available() {
