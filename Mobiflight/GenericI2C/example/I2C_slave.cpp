@@ -67,7 +67,7 @@ void onReceiveI2C(int received_bytes) {
         state = RECEIVE_DATA;                               // next bytes are Data Bytes
       }
       if (i >= 6) {                                         // buffer overflow for messageID
-        state == NOT_SYNCHRONIZED;                          // something went wrong, get a new synchronization
+        state = NOT_SYNCHRONIZED;                           // something went wrong, get a new synchronization
         byte_counter = 0;
         return;
       }
