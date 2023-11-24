@@ -33,8 +33,6 @@ void KAV_A3XX_FCU_LCD::begin()
 
     // Initialises the buffer to all 0's.
     memset(buffer, 0, BUFFER_SIZE_MAX);
-    pinMode(10, OUTPUT);
-    digitalWrite(10, HIGH);
     setStartLabels();
 }
 
@@ -57,6 +55,7 @@ void KAV_A3XX_FCU_LCD::refreshLCD(uint8_t address)
 {
     ht.write(address * 2, buffer[address], 8);
 }
+
 void KAV_A3XX_FCU_LCD::clearLCD()
 {
     for (uint8_t i = 0; i < ht.MAX_ADDR; i++)
@@ -74,7 +73,6 @@ void KAV_A3XX_FCU_LCD::setSpeedLabel(bool enabled)
 void KAV_A3XX_FCU_LCD::setMachLabel(bool enabled)
 {
     SET_BUFF_BIT(SPECIALS, 6, enabled);
-    SET_BUFF_BIT(SPD_TEN, 0, enabled); // Decimal-point
     refreshLCD(SPECIALS);
 }
 
@@ -106,6 +104,7 @@ void KAV_A3XX_FCU_LCD::setHeadingLabel(bool enabled)
     refreshLCD(SPECIALS);
     refreshLCD(ALT_TEN);
 }
+
 void KAV_A3XX_FCU_LCD::setTrackLabel(bool enabled)
 {
     SET_BUFF_BIT(SPECIALS, 4, enabled);
@@ -113,11 +112,13 @@ void KAV_A3XX_FCU_LCD::setTrackLabel(bool enabled)
     refreshLCD(SPECIALS);
     refreshLCD(ALT_HUN);
 }
+
 void KAV_A3XX_FCU_LCD::setLatitudeLabel(bool enabled)
 {
     SET_BUFF_BIT(HDG_TEN, 0, enabled);
     refreshLCD(HDG_TEN);
 }
+
 void KAV_A3XX_FCU_LCD::setHeadingDot(int8_t state)
 {
     bool enabled;
@@ -144,11 +145,13 @@ void KAV_A3XX_FCU_LCD::setAltitudeLabel(bool enabled)
     SET_BUFF_BIT(SPECIALS, 0, enabled);
     refreshLCD(SPECIALS);
 }
+
 void KAV_A3XX_FCU_LCD::setLvlChLabel(bool enabled)
 {
     SET_BUFF_BIT(SPECIALS, 1, enabled);
     refreshLCD(SPECIALS);
 }
+
 void KAV_A3XX_FCU_LCD::setAltitudeDot(int8_t state)
 {
     bool enabled;
@@ -180,6 +183,7 @@ void KAV_A3XX_FCU_LCD::setVrtSpdLabel(bool enabled)
     refreshLCD(SPECIALS);
     refreshLCD(ALT_THO);
 }
+
 void KAV_A3XX_FCU_LCD::setFPALabel(bool enabled)
 {
     SET_BUFF_BIT(SPECIALS, 3, enabled);
@@ -187,10 +191,12 @@ void KAV_A3XX_FCU_LCD::setFPALabel(bool enabled)
     refreshLCD(SPECIALS);
     refreshLCD(ALT_TTH);
 }
+
 void KAV_A3XX_FCU_LCD::setSignLabel(bool enabled)
 {
     vertSignEnabled = enabled;
 }
+
 void KAV_A3XX_FCU_LCD::showVerticalValue(int16_t value)
 {
     if (value > 9999) value = 9999;
@@ -217,6 +223,7 @@ void KAV_A3XX_FCU_LCD::showVerticalValue(int16_t value)
     displayDigit(VRT_HUN, (value % 10));
     displayDigit(VRT_THO, (value / 10));
 }
+
 void KAV_A3XX_FCU_LCD::showFPAValue(int8_t value)
 {
     if (value > 99) value = 99;
@@ -276,6 +283,7 @@ void KAV_A3XX_FCU_LCD::setHeadingDashes(int8_t state)
     displayDigit(HDG_TEN, val);
     displayDigit(HDG_UNIT, val);
 }
+
 void KAV_A3XX_FCU_LCD::setAltitudeDashes(int8_t state)
 {
     uint8_t val;
@@ -306,6 +314,7 @@ void KAV_A3XX_FCU_LCD::setVrtSpdDashes(int8_t state)
         val = 10;
         SET_BUFF_BIT(VRT_UNIT, 0, true); // Set the plus/minus to minus
         SET_BUFF_BIT(VRT_TEN, 0, false); // Remove the plus segment
+        SET_BUFF_BIT(VRT_HUN, 0, false); // Remove the decimal point
     } else {
         val = 11;
         SET_BUFF_BIT(VRT_UNIT, 0, false); // Turn it off
@@ -315,12 +324,14 @@ void KAV_A3XX_FCU_LCD::setVrtSpdDashes(int8_t state)
     displayDigit(VRT_TEN, val);
     displayDigit(VRT_UNIT, val);
 }
+
 void KAV_A3XX_FCU_LCD::setStartLabels()
 {
     setAltitudeLabel(true);
     setLvlChLabel(true);
     setLatitudeLabel(true);
 }
+
 void KAV_A3XX_FCU_LCD::toggleTrkHdgMode(int8_t state)
 {
     if (state == 0)
@@ -328,6 +339,7 @@ void KAV_A3XX_FCU_LCD::toggleTrkHdgMode(int8_t state)
     else
         setTrackMode();
 }
+
 void KAV_A3XX_FCU_LCD::setHeadingMode()
 {
     setHeadingLabel(true);
@@ -336,6 +348,7 @@ void KAV_A3XX_FCU_LCD::setHeadingMode()
     setFPALabel(false);
     trkActive = false;
 }
+
 void KAV_A3XX_FCU_LCD::setTrackMode()
 {
     setHeadingLabel(false);
@@ -344,16 +357,20 @@ void KAV_A3XX_FCU_LCD::setTrackMode()
     setFPALabel(true);
     trkActive = true;
 }
+
 void KAV_A3XX_FCU_LCD::setSpeedMode(uint16_t value)
 {
     setSpeedLabel(true);
     setMachLabel(false);
+    SET_BUFF_BIT(SPD_TEN, 0, false); // Decimal-point
     showSpeedValue(value);
 }
+
 void KAV_A3XX_FCU_LCD::setMachMode(uint16_t value)
 {
     setSpeedLabel(false);
     setMachLabel(true);
+    SET_BUFF_BIT(SPD_TEN, 0, true); // Decimal-point
     showSpeedValue(value);
 }
 
