@@ -105,7 +105,7 @@ void GNC255::set(int16_t messageID, const char *data)
     case 5: // set COM/NAV mode
         setMode(strcmp(data, "0") == 0);
         break;
-    case 6: // set COM/NAV mode
+    case 6: // set contrast (brightness) of OLED
         setContrast(atoi(data));
         break;
     default:
