@@ -23,16 +23,13 @@ private:
     byte    _DATA;
 
     // Methods
-    void handleMobiFlightCmd(char *string);
     void displayDigit(uint8_t address, uint8_t digit);
-    // void setBufferBit(uint8_t address, uint8_t bit, uint8_t enabled);
     void refreshLCD(uint8_t address);
 
 public:
     // Constructor
     // 'CLK' is sometimes referred to as 'RW'
-    KAV_A3XX_EFIS_LCD(uint8_t CS, uint8_t CLK, uint8_t DATA)
-        : ht_efis(CS, CLK, DATA){};
+    KAV_A3XX_EFIS_LCD(uint8_t CS, uint8_t CLK, uint8_t DATA) : ht_efis(CS, CLK, DATA){};
 
     void begin();
     void clearLCD();

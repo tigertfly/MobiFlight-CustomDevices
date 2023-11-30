@@ -26,14 +26,12 @@ private:
 
     // Methods
     void displayDigit(uint8_t address, uint8_t digit);
-    // void setBufferBit(uint8_t address, uint8_t bit, uint8_t enabled);
     void refreshLCD(uint8_t address);
 
 public:
     // Constructor
     // 'CLK' is sometimes referred to as 'RW'
-    KAV_A3XX_FCU_LCD(uint8_t CS, uint8_t CLK, uint8_t DATA)
-        : ht(CS, CLK, DATA), vertSignEnabled(true){};
+    KAV_A3XX_FCU_LCD(uint8_t CS, uint8_t CLK, uint8_t DATA) : ht(CS, CLK, DATA), vertSignEnabled(true){};
 
     void begin();
     void clearLCD();
