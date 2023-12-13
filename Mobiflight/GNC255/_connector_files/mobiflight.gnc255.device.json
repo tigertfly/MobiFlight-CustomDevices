@@ -42,6 +42,11 @@
       "id": 5,
       "label": "Set Mode",
       "description": "0 -> COM Mode, 1 -> NAV Mode"
+    },
+    {
+      "id": 6,
+      "label": "Set Brightness",
+      "description": "$ sets OLED display pixel brightness (0 - 255)"
     }
   ]
 }
