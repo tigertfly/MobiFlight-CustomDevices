@@ -38,7 +38,7 @@ public:
 
 private:
     // U8G2_SSD1322_NHD_256X64_F_4W_SW_SPI *_oledDisplay;
-    U8G2_SSD1322_NHD_256X64_F_4W_HW_SPI *_oledDisplay;
+    U8G2_SSD1362_256X64_F_4W_HW_SPI *_oledDisplay;
     bool                                 _initialised;
     uint8_t                              _clk, _data, _cs, _dc, _reset;
     bool                                 _hasChanged;
