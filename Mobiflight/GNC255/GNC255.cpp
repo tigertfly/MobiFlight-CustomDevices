@@ -42,9 +42,9 @@ void GNC255::attach()
 
     //_oledDisplay = new (allocateMemory(sizeof(U8G2_SSD1322_NHD_256X64_F_4W_SW_SPI))) U8G2_SSD1322_NHD_256X64_F_4W_SW_SPI(U8G2_R0, _clk, _data, _cs, _dc);
     //_oledDisplay = new (allocateMemory(sizeof(U8G2_SSD1322_NHD_256X64_F_4W_HW_SPI))) U8G2_SSD1322_NHD_256X64_F_4W_HW_SPI(U8G2_R0, 53, _dc, _reset);
+    
+    // Surenoo SOG25664B2 (SSD1362) 7pin module on rpi
     _oledDisplay = new (allocateMemory(sizeof(U8G2_SSD1362_256X64_F_4W_HW_SPI))) U8G2_SSD1362_256X64_F_4W_HW_SPI(U8G2_R0, 17, _dc, _reset);
-
-    //U8G2_SSD1362_256X64_F_4W_SW_SPI u8g2(U8G2_R0, /* clock=*/ 18, /* data=*/ 19, /* cs=*/ 17, /* dc=*/ 20, /* reset=*/ 21);	// Enable U8G2_16BIT in u8g2.h
 
     begin();
 }
